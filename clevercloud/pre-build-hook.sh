@@ -2,8 +2,7 @@
 
 set -o errexit -o xtrace
 
-mkdir -p ~/.n8n/nodes
-cd ~/.n8n/nodes
-for node_name in ${APP_GLOBAL_DEPENDENCIES//, }; do
-  npm install -g $node_name
-done
+cd $APP_HOME
+if [ -n "${APP_N8N_DEPENDENCIES//,}" ]; then
+  npm install ${APP_N8N_DEPENDENCIES}
+fi
