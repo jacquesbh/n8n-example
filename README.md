@@ -97,7 +97,7 @@ clever env set CC_FS_BUCKET /data:`clever env | awk -F = '/BUCKET_HOST/ { gsub(/
 Simply set this environment variable to the list of community nodes you want to install (space-separated). For example:
 
 ```bash
-clever env set APP_N8N_COMMUNITY_NODES_TO_INSTALL "n8n-nodes-… n8n-nodes-… n8n-nodes-…"
+clever env set APP_GLOBAL_DEPENDENCIES "n8n-nodes-… n8n-nodes-… n8n-nodes-…"
 ```
 
 ## Deployment
