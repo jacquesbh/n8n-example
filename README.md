@@ -45,7 +45,7 @@ clever domain add <YOUR_DOMAIN_NAME>
 # Step 3: Create required add-ons
 # - File system bucket for persistent storage
 clever addon create fs-bucket --plan s <APP_NAME>-fs
-# - PostgreSQL database for workflow storage
+# - PostgreSQL database for workflow storage (minimum XXS plan required, XS or higher recommended)
 clever addon create postgresql-addon --plan xs_sml <APP_NAME>-pg
 
 # Step 4: Link add-ons to your application
@@ -85,8 +85,19 @@ clever env set DB_POSTGRESDB_PORT `clever env | awk -F = '/POSTGRESQL_ADDON_PORT
 clever env set DB_POSTGRESDB_USER `clever env | awk -F = '/POSTGRESQL_ADDON_USER/ { gsub(/"/, "", $2); print $2}'`
 clever env set DB_POSTGRESDB_PASSWORD `clever env | awk -F = '/POSTGRESQL_ADDON_PASSWORD/ { gsub(/"/, "", $2); print $2}'`
 
+# Clever Cloud hooks
+clever env set CC_PRE_BUILD_HOOK "clevercloud/pre-build-hook.sh"
+
 # Mount the filesystem bucket
 clever env set CC_FS_BUCKET /data:`clever env | awk -F = '/BUCKET_HOST/ { gsub(/"/, "", $2); print $2}'`
+```
+
+## Install community nodes
+
+Simply set this environment variable to the list of community nodes you want to install (space-separated). For example:
+
+```bash
+clever env set APP_N8N_COMMUNITY_NODES_TO_INSTALL "n8n-nodes-… n8n-nodes-… n8n-nodes-…"
 ```
 
 ## Deployment
@@ -106,7 +117,7 @@ clever deploy
 
 ## Important Notes
 
-- **Security**: Always use strong, unique passwords and encryption keys
+- **Database Requirements**: For n8n to function properly on Clever Cloud, your PostgreSQL database must use a minimum of XXS plan. For production environments and better performance, XS plan or larger is strongly recommended.
 - **Scaling**: The configuration above is suitable for small to medium workloads. For higher demands, consider upgrading your PostgreSQL plan
 - **Backups**: Regular backups of your PostgreSQL database are recommended
 
