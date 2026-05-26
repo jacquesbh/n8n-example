@@ -1,8 +1,12 @@
 #!/bin/bash -l
 
-set -o errexit -o xtrace
+set -eu
 
-cd $APP_HOME
-if [ -n "${APP_N8N_DEPENDENCIES//,}" ]; then
-  npm install ${APP_N8N_DEPENDENCIES}
+cd "$APP_HOME"
+
+APP_N8N_DEPENDENCIES_LIST="${APP_N8N_DEPENDENCIES:-}"
+APP_N8N_DEPENDENCIES_LIST="${APP_N8N_DEPENDENCIES_LIST//,/ }"
+
+if [ -n "${APP_N8N_DEPENDENCIES_LIST// /}" ]; then
+  pnpm add --prod ${APP_N8N_DEPENDENCIES_LIST}
 fi

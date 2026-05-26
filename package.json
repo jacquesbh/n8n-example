@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Example deployment for n8n on Clever Cloud",
   "main": "index.js",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
-    "start": "npx n8n"
+    "start": "n8n"
   },
   "repository": {
     "type": "git",
@@ -23,6 +27,11 @@
   },
   "homepage": "https://github.com/CleverCloud/n8n-example#readme",
   "dependencies": {
-    "n8n": "^1.99"
+    "n8n": "^2.22.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@langchain/core": "1.1.44"
+    }
   }
 }
