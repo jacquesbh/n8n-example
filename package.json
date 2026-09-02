@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/CleverCloud/n8n-example#readme",
   "dependencies": {
-    "n8n": "^2.34.6"
+    "n8n": "^2.37.7"
   },
   "pnpm": {
     "overrides": {
